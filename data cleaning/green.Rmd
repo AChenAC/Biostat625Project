@@ -1,0 +1,151 @@
+---
+title: '625'
+author: "Ruoxuanmao"
+date: "2021/12/5"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd("D:/625 final project")
+library(dplyr)
+data <- read.csv('survey_results_public.csv')
+```
+
+```{r}
+num_na = apply(data, 1, function(x) {sum(is.na(x))})
+data = data[which(num_na < 129 * 0.7), ]
+green_names = c("CompanySize","YearsCoding", "YearsCodingProf", "JobSatisfaction", "CareerSatisfaction", "LastNewJob", "TimeFullyProductive","CheckInCode", "HoursComputer", "HoursOutside", "SkipMeals", "Exercise", "Age")
+green = data[names(data) %in% green_names]
+greenNAconut = lapply(green, function(x){sum(is.na(x))}) 
+dummies = fastDummies::dummy_cols(green) 
+dummies = dummies[!names(dummies) %in% green_names]
+NA_dummy = grep(pattern="(_NA)$", x=colnames(dummies))
+dummies_na = dummies[-NA_dummy] 
+Num_col = lapply(green, is.numeric) 
+```
+
+```{r}
+CompanySize_1 = 1 * (green$CompanySize == "Fewer than 10 employees")
+CompanySize_2 = 1 * (green$CompanySize == "10 to 19 employees")
+CompanySize_3 = 1 * (green$CompanySize == "20 to 99 employees")
+CompanySize_4 = 1 * (green$CompanySize == "100 to 499 employees")
+CompanySize_5 = 1 * (green$CompanySize == "500 to 999 employees")
+CompanySize_6 = 1 * (green$CompanySize == "1,000 to 4,999 employees")
+CompanySize_7 = 1 * (green$CompanySize == "5,000 to 9,999 employees")
+CompanySize_8 = 1 * (green$CompanySize == "10,000 or more employees")
+```
+
+```{r}
+YearsCoding_1 = 1 * (green$YearsCoding == "0-2 years")
+YearsCoding_2 = 1 * (green$YearsCoding == "3-5 years")
+YearsCoding_3 = 1 * (green$YearsCoding == "6-8 years")
+YearsCoding_4 = 1 * (green$YearsCoding == "9-11 years")
+YearsCoding_5 = 1 * (green$YearsCoding == "12-14 years")
+YearsCoding_6 = 1 * (green$YearsCoding == "15-17 years")
+YearsCoding_7 = 1 * (green$YearsCoding == "18-20 years")
+YearsCoding_8 = 1 * (green$YearsCoding == "21-23 years")
+YearsCoding_9 = 1 * (green$YearsCoding == "24-26 years")
+YearsCoding_10 = 1 * (green$YearsCoding == "27-29 years")
+YearsCoding_11 = 1 * (green$YearsCoding == "30 or more years")
+```
+
+```{r}
+YearsCodingProf_1 = 1 * (green$YearsCodingProf == "0-2 years")
+YearsCodingProf_2 = 1 * (green$YearsCodingProf == "3-5 years")
+YearsCodingProf_3 = 1 * (green$YearsCodingProf == "6-8 years")
+YearsCodingProf_4 = 1 * (green$YearsCodingProf == "9-11 years")
+YearsCodingProf_5 = 1 * (green$YearsCodingProf == "12-14 years")
+YearsCodingProf_6 = 1 * (green$YearsCodingProf == "15-17 years")
+YearsCodingProf_7 = 1 * (green$YearsCodingProf == "18-20 years")
+YearsCodingProf_8 = 1 * (green$YearsCodingProf == "21-23 years")
+YearsCodingProf_9 = 1 * (green$YearsCodingProf == "24-26 years")
+YearsCodingProf_10 = 1 * (green$YearsCodingProf == "27-29 years")
+YearsCodingProf_11 = 1 * (green$YearsCodingProf == "30 or more years")
+```
+
+```{r}
+JobSatisfaction_1 = 1 * (green$JobSatisfaction == "Extremely dissatisfied"  )
+JobSatisfaction_2 = 1 * (green$JobSatisfaction == "Slightly dissatisfied")
+JobSatisfaction_3 = 1 * (green$JobSatisfaction == "Moderately dissatisfied")
+JobSatisfaction_4 = 1 * (green$JobSatisfaction == "Neither satisfied nor dissatisfied")
+JobSatisfaction_5 = 1 * (green$JobSatisfaction == "Slightly satisfied")
+JobSatisfaction_6 = 1 * (green$JobSatisfaction == "Moderately satisfied")
+JobSatisfaction_7 = 1 * (green$JobSatisfaction == "Extremely satisfied")
+```
+
+```{r}
+CareerSatisfaction_1 = 1 * (green$CareerSatisfaction == "Extremely dissatisfied"  )
+CareerSatisfaction_2 = 1 * (green$CareerSatisfaction == "Slightly dissatisfied")
+CareerSatisfaction_3 = 1 * (green$CareerSatisfaction == "Moderately dissatisfied")
+CareerSatisfaction_4 = 1 * (green$CareerSatisfaction == "Neither satisfied nor dissatisfied")
+CareerSatisfaction_5 = 1 * (green$CareerSatisfaction == "Slightly satisfied")
+CareerSatisfaction_6 = 1 * (green$CareerSatisfaction == "Moderately satisfied")
+CareerSatisfaction_7 = 1 * (green$CareerSatisfaction == "Extremely satisfied")
+```
+
+```{r}
+LastNewJob_1 = 1 * (green$LastNewJob == "I've never had a job")
+LastNewJob_2 = 1 * (green$LastNewJob == "Less than a year ago")
+LastNewJob_3 = 1 * (green$LastNewJob == "Between 1 and 2 years ago")
+LastNewJob_4 = 1 * (green$LastNewJob == "Between 2 and 4 years ago")
+LastNewJob_5 = 1 * (green$LastNewJob == "More than 4 years ago")
+```
+
+```{r}
+TimeFullyProductive_1 = 1 * (green$TimeFullyProductive == "Less than a month")
+TimeFullyProductive_2 = 1 * (green$TimeFullyProductive == "One to three months")
+TimeFullyProductive_3 = 1 * (green$TimeFullyProductive == "Three to six months")
+TimeFullyProductive_4 = 1 * (green$TimeFullyProductive == "Six to nine months")
+TimeFullyProductive_5 = 1 * (green$TimeFullyProductive == "Nine months to a year")
+TimeFullyProductive_6 = 1 * (green$TimeFullyProductive == "More than a year")
+```
+
+```{r}
+CheckInCode_1 = 1 * (green$CheckInCode == "Never")
+CheckInCode_2 = 1 * (green$CheckInCode == "Less than once per month")
+CheckInCode_3 = 1 * (green$CheckInCode == "A few times per week")
+CheckInCode_4 = 1 * (green$CheckInCode == "Weekly or a few times per month")
+CheckInCode_5 = 1 * (green$CheckInCode == "Once a day")
+CheckInCode_6 = 1 * (green$CheckInCode == "Multiple times per day")
+```
+
+```{r}
+HoursComputer_1 = 1 * (green$HoursComputer == "Less than 1 hour")
+HoursComputer_2 = 1 * (green$HoursComputer == "1 - 4 hours")
+HoursComputer_3 = 1 * (green$HoursComputer == "5 - 8 hours")
+HoursComputer_4 = 1 * (green$HoursComputer == "9 - 12 hours")
+HoursComputer_5 = 1 * (green$HoursComputer == "Over 12 hours")
+```
+
+```{r}
+HoursOutside_1 = 1 * (green$HoursOutside == "Less than 30 minutes")
+HoursOutside_2 = 1 * (green$HoursOutside == "30 - 59 minutes")
+HoursOutside_3 = 1 * (green$HoursOutside == "1 - 2 hours")
+HoursOutside_4 = 1 * (green$HoursOutside == "3 - 4 hours")
+HoursOutside_5 = 1 * (green$HoursOutside == "Over 4 hours")
+```
+
+```{r}
+SkipMeals_1 = 1 * (green$SkipMeals == "Never")
+SkipMeals_2 = 1 * (green$SkipMeals == "1 - 2 times per week")
+SkipMeals_3 = 1 * (green$SkipMeals == "3 - 4 times per week")
+SkipMeals_4 = 1 * (green$SkipMeals == "Daily or almost every day")
+```
+
+```{r}
+Exercise_1 = 1 * (green$Exercise == "I don't typically exercise")
+Exercise_2 = 1 * (green$Exercise == "1 - 2 times per week")
+Exercise_3 = 1 * (green$Exercise == "3 - 4 times per week")
+Exercise_4 = 1 * (green$Exercise == "Daily or almost every day")
+```
+
+```{r}
+Age_1 = 1 * (green$Age == "Under 18 years old")
+Age_2 = 1 * (green$Age == "18 - 24 years old")
+Age_3 = 1 * (green$Age == "25 - 34 years old")
+Age_4 = 1 * (green$Age == "35 - 44 years old")
+Age_5 = 1 * (green$Age == "45 - 54 years old")
+Age_6 = 1 * (green$Age == "55 - 64 years old")
+Age_7 = 1 * (green$Age == "65 years or older")
+```
