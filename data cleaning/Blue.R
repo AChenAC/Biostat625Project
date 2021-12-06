@@ -17,10 +17,10 @@ blue_names = c("Hobby", "OpenSource", "Continent", "Student", "Employment", "For
                "EducationParents", "Dependents")
 blue = survey_data[names(survey_data) %in% blue_names]
 NA_count = lapply(blue, function(x){sum(is.na(x))}) 
-dummies = fastDummies::dummy_cols(blue) ## Only dummy variables created for option in words
+full = fastDummies::dummy_cols(blue, ignore_na = TRUE) ## Create dummy variable for all 
+full = full[!names(full) %in% blue_names]
+dummies = fastDummies::dummy_cols(blue, remove_first_dummy = TRUE, ignore_na = TRUE) ## Create dummy for all except first one 
 dummies = dummies[!names(dummies) %in% blue_names]
-NA_dummy = grep(pattern="(_NA)$", x=colnames(dummies))
-dummies_na = dummies[-NA_dummy] 
 Num_col = lapply(blue, is.numeric) 
 # Creat dummy variable for numeric columns
 AssessJob1_1 = 1 * (blue$AssessJob1 == "1")
@@ -57,11 +57,15 @@ JobEmailPriorities1_5 = 1 * (blue$JobEmailPriorities1 == "5")
 JobEmailPriorities1_6 = 1 * (blue$JobEmailPriorities1 == "6")
 JobEmailPriorities1_7 = 1 * (blue$JobEmailPriorities1 == "7")
 
-num_dummy = data.frame(AssessJob1_1, AssessJob1_2, AssessJob1_3, AssessJob1_4, AssessJob1_5, AssessJob1_6, AssessJob1_7, AssessJob1_8, 
-                       AssessJob1_9, AssessJob1_10, AssessBenefits1_1, AssessBenefits1_2, AssessBenefits1_3, AssessBenefits1_4, AssessBenefits1_5, 
-                       AssessBenefits1_6, AssessBenefits1_7, AssessBenefits1_8, AssessBenefits1_9, AssessBenefits1_10, AssessBenefits1_11, 
-                       JobContactPriorities1_1, JobContactPriorities1_2, JobContactPriorities1_3, JobContactPriorities1_4, JobContactPriorities1_5, 
-                       JobEmailPriorities1_1, JobEmailPriorities1_2, JobEmailPriorities1_3, JobEmailPriorities1_4, JobEmailPriorities1_5, 
+num_dummy = data.frame(AssessJob1_2, AssessJob1_3, AssessJob1_4, AssessJob1_5, AssessJob1_6, AssessJob1_7, AssessJob1_8, AssessJob1_9, 
+                       AssessJob1_10, AssessBenefits1_2, AssessBenefits1_3, AssessBenefits1_4, AssessBenefits1_5, AssessBenefits1_6, 
+                       AssessBenefits1_7, AssessBenefits1_8, AssessBenefits1_9, AssessBenefits1_10, AssessBenefits1_11, 
+                       JobContactPriorities1_2, JobContactPriorities1_3, JobContactPriorities1_4, JobContactPriorities1_5, 
+                       JobEmailPriorities1_2, JobEmailPriorities1_3, JobEmailPriorities1_4, JobEmailPriorities1_5, 
                        JobEmailPriorities1_6, JobEmailPriorities1_7)
-blue_dummy_df = cbind(dummies_na, num_dummy)
+blue_dummy_df = cbind(dummies, num_dummy)
 blue_dummy_matrix = as.matrix(blue_dummy_df)
+
+reference_group = cbind(full[which(!names(full) %in% names(dummies))], AssessJob1_1, 
+                        AssessBenefits1_1, JobContactPriorities1_1, JobEmailPriorities1_1) ## Reference Group data
+name_ref = names(reference_group) ## To view reference group options
