@@ -234,7 +234,7 @@ num_monitor = as.numeric(num_monitor)
 data = cbind(blue_dummy_df, green_dummy, combined_matrix, num_monitor, survey_data$ConvertedSalary)
 dim(data)
 table(rowSums(is.na(data)))
-
+load('unimputed.RData')
 
 # missing data imputation by knn
 descale = function(x, imputed_x) {
@@ -247,4 +247,4 @@ knn_imputor = preProcess(data, method = 'knnImpute', k = 1)  # caution: preProce
 imputed_data = predict(knn_imputor, data)
 descaled_imputed_data = descale(data, imputed_data)  # descale data
 descaled_imputed_data[, 1:367] = round(descaled_imputed_data[, 1:367])  # deal with numerical errors from descaling 
-save(descaled_imputed_data)
+save(descaled_imputed_data, file = 'imputed_data.RData')
