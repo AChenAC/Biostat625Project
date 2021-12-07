@@ -234,7 +234,7 @@ num_monitor = as.numeric(num_monitor)
 data = cbind(blue_dummy_df, green_dummy, combined_matrix, num_monitor, survey_data$ConvertedSalary)
 dim(data)
 table(rowSums(is.na(data)))
-load('unimputed.RData')
+
 
 # missing data imputation by knn
 descale = function(x, imputed_x) {
@@ -248,3 +248,42 @@ imputed_data = predict(knn_imputor, data)
 descaled_imputed_data = descale(data, imputed_data)  # descale data
 descaled_imputed_data[, 1:367] = round(descaled_imputed_data[, 1:367])  # deal with numerical errors from descaling 
 save(descaled_imputed_data, file = 'imputed_data.RData')
+
+
+# outcome variables
+dummy_to_cate = function(dummy_matrix) {
+  options_statement = colnames(dummy_matrix)
+  n = nrow(dummy_matrix)
+  category = rep(0, n)
+  for (i in 1:n) {
+    loc = which(dummy_matrix[i, ] == 1)
+    if (length(loc) > 0) {
+      category[i] = loc
+    }
+  }
+  category = category + 1
+  map = c('reference', options_statement)
+  return(list(category = category, map = map))
+}
+AI_Dangerous = descaled_imputed_data[, grep('AIDangerous', colnames(descaled_imputed_data))]
+AI_Dangerous_ = dummy_to_cate(AI_Dangerous)
+AI_Dangerous = AI_Dangerous_$category
+AI_Dangerous_map = AI_Dangerous_$map
+
+AI_Interesting = descaled_imputed_data[, grep('AIInteresting', colnames(descaled_imputed_data))]
+AI_Interesting_ = dummy_to_cate(AI_Interesting)
+AI_Interesting = AI_Interesting_$category
+AI_Interesting_map = AI_Interesting_$map
+
+AI_Responsible = descaled_imputed_data[, grep('AIResponsible', colnames(descaled_imputed_data))]
+AI_Responsible_ = dummy_to_cate(AI_Responsible)
+AI_Responsible = AI_Responsible_$category
+AI_Responsible_map = AI_Responsible_$map
+
+AI_Future = descaled_imputed_data[, grep('AIFuture', colnames(descaled_imputed_data))]
+AI_Future_ = dummy_to_cate(AI_Future)
+AI_Future = AI_Future_$category
+AI_Future_map = AI_Future_$map
+
+descaled_imputed_data = descaled_imputed_data[, -grep('AI', colnames(descaled_imputed_data))]
+cleaned_data = cbind(descaled_imputed_data, AI_Dangerous, AI_Interesting, AI_Responsible, AI_Future)
