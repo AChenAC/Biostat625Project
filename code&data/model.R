@@ -33,8 +33,10 @@ mean(predict(mlr, newdata = cleaned_data_test) == cleaned_data_test$AI_Future) #
 
 # Wald test
 mlr.sum = summary(mlr)
-z <- mlr.sum$coefficients / mlr.sum$standard.errors
+beta = mlr.sum$coefficients
+z <- beta / mlr.sum$standard.errors
 p <- (1 - pnorm(abs(z), 0, 1)) * 2
 p
 mean(p < 0.05)
-save(z, p, file = 'lr_model_test.Rdata')
+save(mlr.sum, beta, z, p, file = 'lr_model_test.Rdata')
+
