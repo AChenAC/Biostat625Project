@@ -13,7 +13,7 @@ survey_data$Continent = countrycode(sourcevar = survey_data[, "Country"],
                                     destination = "continent")
 
 
-# 3.convert categorical variables in blue into dummy varibles
+# 3.convert categorical variables in blue into dummy variables
 blue_names = c("Hobby", "OpenSource", "Continent", "Student", "Employment", "FormalEducation", "UndergradMajor", "HopeFiveYears", 
                "JobSearchStatus", "AssessJob1", "AssessBenefits1", "JobContactPriorities1", "JobEmailPriorities1", "AgreeDisagree1", 
                "AgreeDisagree2", "AgreeDisagree3", "OperatingSystem", "AIDangerous", "AIInteresting", "AIResponsible", "AIFuture",
@@ -287,3 +287,6 @@ AI_Future_map = AI_Future_$map
 
 descaled_imputed_data = descaled_imputed_data[, -grep('AI', colnames(descaled_imputed_data))]
 cleaned_data = cbind(descaled_imputed_data, AI_Dangerous, AI_Interesting, AI_Responsible, AI_Future)
+save(AI_Dangerous_map, AI_Interesting_map, AI_Responsible_map, AI_Future_map, cleaned_data, file = 'cleaned_data.RData')
+
+write.csv(cleaned_data, file = 'AI_data.csv')
