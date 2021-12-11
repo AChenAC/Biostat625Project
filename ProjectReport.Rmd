@@ -1,0 +1,35 @@
+---
+title: Exploring the differences of attitudes towards AI among developers with various
+  background
+output: html_document
+---
+
+## Introduction 
+Even though the term “AI” has become a trending topic that attracts the attention of lots of the public, the definition of artificial intelligence (AI) has remained ambiguous [1]. There is no well-accepted universal interpretation for artificial intelligence since a 2018 survey identified hundreds of definitions of intelligence [5]. Some people define artificial intelligence by referring to human intelligence, which can be seen as the problem of “making a machine behave in ways that would be called intelligent if a human were so behaving” [4]. Some people specify AI as “a system’s ability to interpret external data correctly, to learn from such data, and to use those learnings to achieve specific goals and tasks through flexible adaptation” [2]. Despite all different definitions, a consensus about AI is that “it is associated with machines and computers to help humankind solve problems and facilitate working processes” [3]. Though AI is still under development, the application of weak AI has been widely used in everyday life such as Siri, self-driving cars, etc. Since the AI industry is booming, we are interested in exploring whether people with various backgrounds tend to have different attitudes towards AI. 
+
+The dataset that we used to answer such a question is obtained by the 2018 Stack Overflow developer survey. Stack Overflow developer survey is a survey that Stack Overflow publishes annually to collect information from the developer community about their profiles, technologies, and work-related questions. We are particularly interested in the survey of 2018 is because the stack overflow survey team covered a few new topics ranging from artificial intelligence to ethics in coding. Due to the nature of the survey, we are unable to explore if there are differences in attitudes towards AI among the general public because respondents were recruited primarily through channels owned by Stack Overflow (i.e. most of them are somehow interacting with coding). Therefore, our question of interest becomes whether if coders/developers with various backgrounds have different attitudes towards AI. 
+
+
+## Data Cleaning 
+
+
+## Methods 
+
+
+## Results 
+
+
+## Conclusion 
+
+
+## References 
+
+1. Wang, Pei. "On Defining Artificial Intelligence" Journal of Artificial General Intelligence, vol.10, no.2, 2019, pp.1-37. https://doi.org/10.2478/jagi-2019-0002
+
+2. Kaplan, Andreas, and Michael Haenlein. "Siri, Siri, in my hand: Who’s the fairest in the land? On the interpretations, illustrations, and implications of artificial intelligence." Business Horizons 62.1 (2019): 15-25.
+
+3. Tai, Michael Cheng-Tek. “The impact of artificial intelligence on human society and bioethics.” Tzu chi medical journal vol. 32,4 339-343. 14 Aug. 2020, doi:10.4103/tcmj.tcmj_71_20
+
+4. McCarthy, J., Minsky, M. L., Rochester, N., & Shannon, C. E. (1955). A proposal for the Dartmouth summer research project on artificial intelligence. Available at http://www-formal.stanford.edu/jmc/history/dartmouth/dartmouth.html
+
+5. Monett, D., and Lewis, C. W. P. 2018. Getting clarity by defining Artificial Intelligence - A Survey. In Muller, V.C., ed., Philosophy and Theory of Artificial Intelligence 2017. Berlin: Springer. 212-214.
