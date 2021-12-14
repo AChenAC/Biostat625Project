@@ -23,7 +23,7 @@ As values of the outcome variable is imbalanced, we adjust weights of samples ac
 $$L(\boldsymbol\beta) = \sum_{i = 1}^n w_i \sum_{k=1}^K  I(y_i = k) \log(p_{ik}) $$
 where $I(\cdot)$ is the indicator function, $w_i$ is the assigned weight and
 $$p_{ik} = \frac{1}{1 + \exp(-\boldsymbol\beta_k^T \boldsymbol x_i)}$$
-The weights are carefully selected such that the proportion of predicted category in the training set is in line with the actual ratio of labels. 
+The weights are carefully selected such that the proportion of predicted category in the training set is in line with the actual ratio of training labels. 
 
 
 ## 4. Results 
