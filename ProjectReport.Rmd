@@ -36,7 +36,7 @@ rownames(table1) = c('training accuracy', 'testing accuracy')
 colnames(table1) = c('logistic regression', 'random forest')
 kable(table1, caption = 'Prediction Results.')
 ```
-We now proceed with the logistic regression model. We perform the Wald test on the fitted coefficients in logistic regression. We identify significant coefficients using 0.05 as the cut-off of p-values. Figure 1 shows the significance of coefficients in the fitted logistic regression by questions. The value of "significance" is defined as follows. All insignificant coefficients are assigned 0 as the value of "significance". Then, we linear map p-values from 0-0.05 to 1-0.5; a more significant coefficient receive a large "significance" score. Finally, the direction (sign of the fitted coefficients) is assigned to the sign of the value of "significance". The reference category is "I don't care about or I haven't thought about the future of AI.".
+We now proceed with the logistic regression model. We perform the Wald test on the fitted coefficients in logistic regression. We identify significant coefficients using 0.05 as the cut-off of p-values. Figure 1 shows the significance of coefficients in the fitted logistic regression by questions. The value of "significance" is defined as follows. All insignificant coefficients are assigned 0 as the value of "significance". Then, we linearly map p-values from 0-0.05 to 1-0.5; a more significant coefficient receive a large "significance" score. Finally, the direction (sign of the fitted coefficients) is assigned to the sign of the value of "significance". The reference category is "I don't care about or I haven't thought about the future of AI.".
 
 As shown Figure 1, people's difference in the following aspects seem to have significant impacts on their view on the future of AI: 
 
@@ -51,11 +51,20 @@ As shown Figure 1, people's difference in the following aspects seem to have sig
 * Experience on different operation systems (OperatingSystem)
 * Number of monitors during working (NumberMonitors)
 
-Almost all dummy variables in the above questions are significant at level of 0.05. Therefore, almost all subgroups within these questions hold some different attitude on the future of AI (compared to the reference group). There are significant coefficients in other questions, showing such difference also exists among people in other aspect other than the above listed ones. Here are a list of interesting findings that we think:
+Almost all dummy variables in the above questions are significant at level of 0.05. Therefore, almost all subgroups within these questions hold some different attitude on the future of AI (compared to the reference group). There are significant coefficients in other questions, showing such difference also exists among people in other aspect other than the above listed ones. Here are a list of what we think of as interesting findings. It is worth to mention that our findings are based on significant associations which do not guarantee a casual effect.
 
-* Programmers who are students care more about the future of AI, and are more likely to be excited with the possibility of AI.
+* Programmers who are students care more about the future of AI, and are more likely to feel excited with the possibility of AI.
 * Programmers taking coding as a hobby care more about the future of AI. 
-(to be finished)
+* Programmers with a bachelor's degree in health science tend to be more worried about the potential danger of AI technology, while programmers major in humanities discipline are more likely to be exciting about the possibilities of AI. 
+* Programmers who studied mathematics, statistics and information systems are less inclined to concern the danger of AI, while a undergraduate degree in social science boosts the excitement on the AI development.
+* Programmers identifying them as in a competitive environment are less likely to think of the future of AI as dangerous. 
+* Compared to those who use BSD/Unix the most, programmers using linux based operating system, MacOS or Windows tend to be concerned about the danger that may be raised by AI.
+* Programmers who wake up before 12 p.m. at noon are more likely to be excited about the future of AI.
+* (to be finished)
+
+There are even more significant associations and thus more interpretations. However, due to the limit of the report, we cannot present all of them. Readers who are interested in this topic can explore Figure 1 as well as the coefficient matrix (lr_model_test.Rdata) on our project github website. 
+
+
 
 ![image](p-value.png)
 *Figure 1. Significance of coefficients in the fitted logistic regression by questions.*
