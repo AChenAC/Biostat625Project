@@ -15,6 +15,24 @@ The dataset that we used to answer such a question is obtained by the 2018 Stack
 
 ## 2. Data Cleaning 
 
+### 2.1 Data Description
+
+Our data set was collected and published by the Stack Overflow website and was also the full, cleaned results of the 2018 Stack Overflow Developer Survey. The Survey included 129 questions, most of which are multiple choices questions covering education, employment, coding experience & habits, demographic information, attitudes towards different topics and Stack Overflow product feedback and review. All the respondents were recruited primarily through channels owned by Stack Overflow. In the released version, there are 98,855 responses in total. The survey responses are publickly available at https://insights.stackoverflow.com/survey/2018. 
+
+### 2.2 Data Cleaning
+
+#### 2.2.1 Delete irrelevant questions
+
+Because our problem of interest is whether coders/developers with various backgrounds have different attitudes towards the future of AI, there are many questions not related to the problem of interest in the original survey, such as attitudes towards advertisements on Stack Overflow, activity or engagement on Stack Overflow, product feedback, etc. Therefore, we screened all the questions in the survey and manually deleted those irrelevant questions in order to prevent interference with the later model. After deleting, there are still 52 questions remaining. 
+
+#### 2.2.2 Convert categorical variables to binary dummy variables
+
+For continuous variables (e.g., salary) in the data set, we can directly use them in modelling. However, for categorical variables, we are supposed to use reference cell coding method to convert them to binary dummy variables. For example, in terms of the variable Hobby, there are two different categories: Yes and No. Therefore, we choose the No category to be the reference group and encode the two categories into one dummy variable with binary value. In the data set, we also make some special transformations of the categorical variables. For instance, because the satisfaction variables assume that differences between adjacent groups are equal and there is an increasing trend under sequential categories, we convert job and career satisfaction into ordinal integer scores (1: extremely dissatisfied, 7: extremely satisfied). In addition, we decide to convert country to continent using country code because there are too many types of country variables.
+
+#### 2.2.3 Fill in missing values
+
+After prescreening, there is only 3846 complete responses out of 98,855 responses. If we simply drop all the cases with NA, we will lose a substantial amount of information. The following steps are how we deal with NAs. Firstly, we drop responses with more than 50% unanswered questions. We regard the responses with more than half of the questions unanswered as invalid responses. Then, we use the KNN method to impute all the missing values. After imputation, we obtain a feature matrix of 69,083 samples and 357 independent variables. 
+
 ## 3. Methods
 
 To answer our proposed question of interest, we consider methods of classification over regression since our outcome variable of interest is categorical. Potential methods for the purpose of multi-category classification include KNN, logistic regression, SVM, tree-based methods, neural network, etc. However, since we are interested in identifying independent variables that have significant impact on the response, we will use multinomial logistic regression as it provides a natural as well as straightforward statistical testing framework for coefficients. We first train the model on a training set containing 80% of the cleaned dataset, and check the prediction accuracy on the remaining 20% samples to check the validity of the fitted model. 
@@ -51,7 +69,7 @@ As shown Figure 1, people's difference in the following aspects seem to have sig
 * Experience on different operation systems (OperatingSystem)
 * Number of monitors during working (NumberMonitors)
 
-Almost all dummy variables in the above questions are significant at level of 0.05. Therefore, almost all subgroups within these questions hold some different attitude on the future of AI (compared to the reference group). There are significant coefficients in other questions, showing such difference also exists among people in other aspect other than the above listed ones. Here are a list of what we think of as interesting findings. It is worth to mention that our findings are based on significant associations which do not guarantee a casual effect.
+Almost all dummy variables in the above questions are significant at level of 0.05. Therefore, almost all subgroups within these questions hold some different attitude on the future of AI (compared to the reference group). There are significant coefficients in other questions, showing such difference also exists among people in other aspect other than the above listed ones. Here are some findings that we think are interesting. It is worth to mention that our findings are based on significant associations which do not guarantee a casual effect.
 
 * Programmers who are students care more about the future of AI, and are more likely to feel excited with the possibility of AI.
 * Programmers taking coding as a hobby care more about the future of AI. 
@@ -60,9 +78,12 @@ Almost all dummy variables in the above questions are significant at level of 0.
 * Programmers identifying them as in a competitive environment are less likely to think of the future of AI as dangerous. 
 * Compared to those who use BSD/Unix the most, programmers using linux based operating system, MacOS or Windows tend to be concerned about the danger that may be raised by AI.
 * Programmers who wake up before 12 p.m. at noon are more likely to be excited about the future of AI.
-* (to be finished)
+* Programmers who make more money are inclined to think the development of AI as exciting.
+* Programmers with experiment on Python, CSS, C#, SQL, Java, Matlab, CoffeeScript, Tensorflow and Pytorch are more worried about the danger of AI.
+* Programmers who are female are less worried about the dange of AI.
+* Programmers identifying themselves as asexual tend to care less about the the future of AI.
 
-There are even more significant associations and thus more interpretations. However, due to the limit of the report, we cannot present all of them. Readers who are interested in this topic can explore Figure 1 as well as the coefficient matrix (lr_model_test.Rdata) on our project github website. 
+There are even more significant associations and thus more interpretations can be made. However, due to the limit of the report, we cannot present all of them. Readers who are interested in this topic can explore Figure 1 as well as the coefficient matrix (lr_model_test.Rdata) on our project github website https://github.com/AChenAC/Biostat625Project. 
 
 
 
