@@ -1,6 +1,6 @@
 ---
-title: Exploring the differences of attitudes towards the Future of AI among developers with various
-  backgrounds
+title: Exploring the Differences of Attitudes towards the Future of AI among Developers with Various
+  Backgrounds
 subtitle: BIOSTAT 625 Final Project Report
 author: Aonan Chen, Guoxuan Ma, Ruoxuan Mao and Zixi Wang
 date: Dec 13, 2021
