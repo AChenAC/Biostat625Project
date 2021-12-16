@@ -13,11 +13,16 @@ Even though the term “AI” has become a trending topic that attracts the atte
 
 The dataset that we used to answer such a question is obtained by the 2018 Stack Overflow developer survey. Stack Overflow developer survey is a survey that Stack Overflow publishes annually to collect information from the developer community about their profiles, technologies, and work-related questions. That we are particularly interested in the survey of 2018 is because the Stack Overflow survey team covered a few new topics ranging from artificial intelligence to ethics in coding. Due to the nature of the survey, we are unable to explore if there are differences in attitudes towards AI among the general public because respondents were recruited primarily through channels owned by Stack Overflow (i.e. most of them are somehow interacting with coding). Therefore, our question of interest becomes whether coders/developers with various backgrounds have different attitudes towards AI. In particular, we would like to see whether there is such difference on programmer's opinions on the future of AI. If such difference stands, we are further interested to explore whether a significant effect is positive or negative. 
 
-## 2. Data Cleaning 
+## 2. Data Description and  Data Cleaning 
 
 ### 2.1 Data Description
 
-Our data set was collected and published by the Stack Overflow website and was also the full, cleaned results of the 2018 Stack Overflow Developer Survey. The Survey included 129 questions, most of which are multiple choices questions covering education, employment, coding experience & habits, demographic information, attitudes towards different topics and Stack Overflow product feedback and review. All the respondents were recruited primarily through channels owned by Stack Overflow. In the released version, there are 98,855 responses in total. The survey responses are publickly available at https://insights.stackoverflow.com/survey/2018. 
+Our data set was collected and published by the Stack Overflow website and was also the full, cleaned results of the 2018 Stack Overflow Developer Survey. The Survey included 129 questions, most of which are multiple choices questions covering education, employment, coding experience & habits, demographic information, attitudes towards different topics and Stack Overflow product feedback and review. All the respondents were recruited primarily through channels owned by Stack Overflow. In the released version, there are 98,855 responses in total. The survey responses are publickly available at https://insights.stackoverflow.com/survey/2018. The outcome variable of interest comes from the question below with three options:
+
+* Overall, what's your take on the future of artificial intelligence?
+  + I'm worried about the dangers more than I'm excited about the possibilities.
+  + I'm excited about the possibilities more than worried about the dangers.
+  + I don't care about it, or I haven't thought about it.
 
 ### 2.2 Data Cleaning
 
@@ -73,6 +78,10 @@ Almost all dummy variables in the above questions are significant at level of 0.
 
 * Programmers who are students care more about the future of AI, and are more likely to feel excited with the possibility of AI.
 * Programmers taking coding as a hobby care more about the future of AI. 
+
+![image](p-value.png)
+*Figure 1. Significance of coefficients in the fitted logistic regression by questions.*
+
 * Programmers with a bachelor's degree in health science tend to be more worried about the potential danger of AI technology, while programmers major in humanities discipline are more likely to be exciting about the possibilities of AI. 
 * Programmers who studied mathematics, statistics and information systems are less inclined to concern the danger of AI, while a undergraduate degree in social science boosts the excitement on the AI development.
 * Programmers identifying them as in a competitive environment are less likely to think of the future of AI as dangerous. 
@@ -84,12 +93,6 @@ Almost all dummy variables in the above questions are significant at level of 0.
 * Programmers identifying themselves as asexual tend to care less about the the future of AI.
 
 There are even more significant associations and thus more interpretations can be made. However, due to the limit of the report, we cannot present all of them. Readers who are interested in this topic can explore Figure 1 as well as the coefficient matrix (lr_model_test.Rdata) on our project github website https://github.com/AChenAC/Biostat625Project. 
-
-
-
-![image](p-value.png)
-*Figure 1. Significance of coefficients in the fitted logistic regression by questions.*
-
 
 ## 5. Conclusion 
 
