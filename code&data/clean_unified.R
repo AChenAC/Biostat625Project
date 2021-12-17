@@ -187,7 +187,9 @@ green_dummy <- cbind(CompanySize_2, CompanySize_3, CompanySize_4, CompanySize_5,
                      Exercise_4, Age_2, Age_3, Age_4, Age_5, Age_6, Age_7)
 green_dummy = apply(green_dummy, 2, as.numeric)
 
-# 5.binarily code questions with 'check all that apply' (varibles in yellow)
+# 5.binarily code questions with 'check all that apply' (varibles in yellow): 
+# create L dummy variables where L is the number of levels, 
+# the l-th dummy variable is 1 if the l-th item is checked by respondent
 multiple_options_convertor = function(response, question_name) {
   n = length(response)
   option_list = c()
@@ -224,19 +226,19 @@ for (question_name in question_names) {
 }
 
 
-# number of monitors
+# 6. number of monitors
 num_monitor = survey_data$NumberMonitors
 num_monitor[num_monitor == 'More than 4'] = 4
 num_monitor = as.numeric(num_monitor)
 
 
-# column bind
+# 7. column bind
 data = cbind(blue_dummy_df, green_dummy, combined_matrix, num_monitor, survey_data$ConvertedSalary)
 dim(data)
 table(rowSums(is.na(data)))
 
 
-# missing data imputation by knn
+# 8. missing data imputation by knn
 descale = function(x, imputed_x) {
   scaled_x = scale(x)
   descaled_x = t(t(imputed_x) * attr(scaled_x, 'scaled:scale') + attr(scaled_x, 'scaled:center'))
@@ -250,7 +252,7 @@ descaled_imputed_data[, 1:367] = round(descaled_imputed_data[, 1:367])  # deal w
 save(descaled_imputed_data, file = 'imputed_data.RData')
 
 
-# outcome variables
+# 9. get outcome variables
 dummy_to_cate = function(dummy_matrix) {
   options_statement = colnames(dummy_matrix)
   n = nrow(dummy_matrix)

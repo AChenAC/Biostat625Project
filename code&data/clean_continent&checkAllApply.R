@@ -10,7 +10,8 @@ survey_data$Continent = countrycode(sourcevar = survey_data[, "Country"],
                                     origin = "country.name",
                                     destination = "continent")
 
-# binarily code questions with 'check all that apply'
+# binarily code questions with 'check all that apply': create L dummy variables where L is the number of levels, 
+# the l-th dummy variable is 1 if the l-th item is checked by respondent
 multiple_options_convertor = function(response, question_name) {
   n = length(response)
   option_list = c()
@@ -51,5 +52,3 @@ for (question_name in question_names) {
   converted_matrix[[question_name]] = multiple_options_convertor(survey_data[, question_name], question_name)
   combined_matrix = cbind(combined_matrix, converted_matrix[[question_name]])
 }
-library(Matrix)
-sparce_combined_matrix = Matrix(combined_matrix)

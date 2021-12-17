@@ -46,8 +46,7 @@ As values of the outcome variable is imbalanced, we adjust weights of samples ac
 $$L(\boldsymbol\beta) = \sum_{i = 1}^n w_i \sum_{k=1}^K  I(y_i = k) \log(p_{ik}) $$
 where $I(\cdot)$ is the indicator function, $w_i$ is the assigned weight and
 $$p_{ik} = \frac{1}{1 + \exp(-\boldsymbol\beta_k^T \boldsymbol x_i)}$$
-The weights are carefully selected such that the proportion of predicted category in the training set is in line with the actual ratio of training labels. 
-
+The weights are carefully selected such that the proportion of predicted category in the training set is in line with the actual ratio of training labels. Since the scale of the dataset is large, we run the model on the Biostats Cluster to alleviate the computational challenge.
 
 ## 4. Results 
 
@@ -96,7 +95,14 @@ There are even more significant associations and thus more interpretations can b
 
 ## 5. Conclusion 
 
+In this project, we use the Stack Overflow 2018 developer survey to investigate potential difference towards the future of AI among different groups of people on the attitudes. We identify several significant associations and present some interesting findings. While the large sample size in this dataset makes possible a more thorough investigation into the population, it poses two big challenges as well. First, there are extensive missing values in the dataset. Instead of dropping cases with NA, we impute missing values by KNN. Second, the large dataset raises a computational challenge, which is alleviated by running the model on Biostats Cluster. 
+
+There are some limitations in our project. While we hope to generalize our findings to whole programming community, responses from females programmers and those in non-English-speaking countries are limited, and there are potential bias among people who are willing to respond the survey. In addition, our findings are based on significant associations, but future studies focusing on causal inference are needed to confirm whether such association comes from casual relationship. Finally, we include diverse predictors into our model, thus literature review or correlation analysis may be needed to infer whether there are confounding predictors or potential significant interactions between them. 
+
 ## 6. Contribution of Group Members
+
+Overall, we split the work evenly. On the stage of data cleaning, we divide all questions requiring extra processing into three parts (in blue, in green and highlighted). Aonan and Guoxuan processes questions in blue and highlighted, respectively; Ruoxuan and Zixi work on those in green. Then, we jointly work on model fitting and p-value visualization. As for the final report, Aonan write up the introduction, Zixi work on data description and data cleaning, Guoxuan focus on methods and results and Ruoxuan makes the conclusion. 
+
 
 ## References 
 

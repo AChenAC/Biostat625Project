@@ -58,7 +58,7 @@ for (i in 1:7) {
                theme_ipsum() + 
                scale_y_discrete(labels = y_label[q_start:q_end]) + 
                geom_hline(yintercept = first_occurance - (q_start - 1) - 0.5, 
-                          color = 'purple4', linetype = "dashed", size = 0.5) + 
+                          color = 'purple4', linetype = "dashed", size = 1) + 
                theme(axis.text.y = element_text(size = 10), 
                      axis.text.x = element_text(size = 10),
                      legend.position = "top",

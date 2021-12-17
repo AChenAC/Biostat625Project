@@ -2,10 +2,12 @@ library(nnet)
 load('cleaned_data.Rdata')
 set.seed(2021)
 
-cleaned_data[, 357] = scale(cleaned_data[, 357])
-cleaned_data = data.frame(cleaned_data)
 n = dim(cleaned_data)[1]
 n_train = floor(0.8 * n)
+
+# scale salary
+cleaned_data[, 357] = scale(cleaned_data[, 357])
+cleaned_data = data.frame(cleaned_data)
 
 # split train/test
 train_idx = sample(n, size = n_train, replace = F)
