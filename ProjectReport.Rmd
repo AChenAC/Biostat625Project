@@ -91,7 +91,7 @@ Almost all dummy variables in the above questions are significant at level of 0.
 * Programmers who are female are less worried about the dange of AI.
 * Programmers identifying themselves as asexual tend to care less about the the future of AI.
 
-There are even more significant associations and thus more interpretations can be made. However, due to the limit of the report, we cannot present all of them. Readers who are interested in this topic can explore Figure 1 as well as the coefficient matrix (lr_model_test.Rdata) on our project github website https://github.com/AChenAC/Biostat625Project. 
+There are other significant associations left unexplained and one can make more interpretations. However, due to the limit of the report, we cannot present all of them. Readers who are interested in this topic can explore Figure 1 as well as the coefficient matrix (lr_model_test.Rdata) on our project github website https://github.com/AChenAC/Biostat625Project. 
 
 ## 5. Conclusion 
 
